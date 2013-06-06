@@ -32,12 +32,12 @@ module KWSM
 end
 
 
-get '/kwsm' do
+get '/image' do
 	"<img src=\"#{KWSM.image_rand.src}\">"
 end
 
 
-post '/kwsm' do
+post '/lingr' do
 	content_type :text
 	json = JSON.parse(request.body.string)
 	json["events"].select {|e| e['message'] }.map {|e|
