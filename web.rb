@@ -1,39 +1,25 @@
 # -*- encoding: UTF-8 -*-
-# https://github.com/raa0121/raa0121-lingrbot/blob/master/dice.rb
+require "bundler"
 require 'sinatra'
 require 'json'
 require "mechanize"
+load "kwsm.rb"
+
+kwsm = KWSM.new
 
 
 get '/' do
-	"Hello, world"
+	"わかるわ"
 end
 
 
-
-# -------------------- kwsm --------------------
-
-module KWSM
-	urls = [
-		"http://yomigee.blog87.fc2.com/blog-entry-1615.html",
-		"http://yomigee.blog87.fc2.com/blog-entry-1614.html"
-	]
-
-	agent = Mechanize.new
-	@@images = urls.map {|url|
-		agent.get(url).images_with(:src => /cg/)
-	}.flatten
-	
-	def image_rand
-		@@images[rand(@@images.length)]
-	end
-
-	module_function:image_rand
+get '/image_random' do
+	"<img src=\"#{kwsm.get_image_url_random}\">"
 end
 
 
-get '/image' do
-	"<img src=\"#{KWSM.image_rand.src}\">"
+get '/image_list' do
+	kwsm.image_urls.join("<br>")
 end
 
 

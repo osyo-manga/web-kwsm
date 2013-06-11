@@ -1,6 +1,9 @@
+source 'https://rubygems.org'
 
-source :rubygems
 gem 'sinatra'
 gem 'thin'
 gem "mechanize", '2.6.0'
+gem 'data_mapper'
+gem 'dm-postgres-adapter'
+gem 'dm-migrations'
 
