@@ -22,23 +22,19 @@ MATOME = [
 ]
 
 
+
 class KWSM
 	def initialize
 		@image_urls = []
 
 		agent = Mechanize.new
-		@image_urls = MATOME.map {|url|
+		@image_urls += MATOME.map {|url|
 			agent.get(url).images_with(:src => /cg/)
 		}.flatten
 
 		@image_urls += ImageURLs.map(&:url)
 	end
 	attr_reader :image_urls
-	
-	def refresh
-		@image_urls = []
-		@image_urls += ImageURLs.map(&:url)
-	end
 
 	def add url
 		ImageURLs.first_or_create({:url => url})
