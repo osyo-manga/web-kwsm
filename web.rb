@@ -29,7 +29,7 @@ post '/lingr' do
 	json["events"].select {|e| e['message'] }.map {|e|
 		text = e["message"]["text"]
 		if /^#kwsm/ =~ text || /わかるわ/u =~ text || /わからないわ/ =~ text
-			return "わかるわ\n" + KWSM.image_rand.src
+			return "わかるわ\n" + kwsm.get_image_url_random
 		end
 	}
 	return ""
