@@ -27,10 +27,10 @@ class KWSM
 	def initialize
 		@image_urls = []
 
-		agent = Mechanize.new
-		@image_urls += MATOME.map {|url|
-			agent.get(url).images_with(:src => /cg/)
-		}.flatten
+# 		agent = Mechanize.new
+# 		@image_urls += MATOME.map {|url|
+# 			agent.get(url).images_with(:src => /cg/)
+# 		}.flatten
 
 		@image_urls += ImageURLs.map(&:url)
 	end
