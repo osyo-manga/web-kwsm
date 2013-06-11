@@ -28,8 +28,16 @@ post '/lingr' do
 	json = JSON.parse(request.body.string)
 	json["events"].select {|e| e['message'] }.map {|e|
 		text = e["message"]["text"]
-		if /^#kwsm/ =~ text || /わかるわ/u =~ text || /わからないわ/ =~ text
+		if /^#kwsm$/ =~ text || /わかるわ$/u =~ text || /わからないわ$/ =~ text
 			return "わかるわ\n" + kwsm.get_image_url_random
+		end
+		case text
+		when /^#kwsm[\s　]+add[\s　]+(.+)/
+			kwsm.add(text[/^#kwsm[\s　]+add[\s　]+(.+)/, 1])
+			return "追加されたのね、わかるわ"
+		when /^#kwsm[\s　]+delete[\s　]+(.+)/
+			kwsm.delete(text[/^#kwsm[\s　]+delete[\s　]+(.+)/, 1])
+			return "削除されたのね、わからないわ"
 		end
 	}
 	return ""
