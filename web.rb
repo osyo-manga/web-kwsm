@@ -17,6 +17,10 @@ get '/image_random' do
 	"<img src=\"#{kwsm.get_image_url_random}\">"
 end
 
+get '/image_all' do
+	kwsm.image_urls.map {|url| "<a href=\"#{url}\"><img src=\"#{url}\" width=\"20%\"></a>" }.join
+end
+
 
 get '/image_list' do
 	kwsm.image_urls.join("<br>")
